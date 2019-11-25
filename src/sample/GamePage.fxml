@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="GamePagePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="984.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <ImageView fitHeight="984.0" fitWidth="1920.0" layoutX="2.0" layoutY="3.0">
+         <image>
+            <Image url="@../images/Ground.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="56.0" layoutY="183.0" prefHeight="687.0" prefWidth="194.0" spacing="43.0">
+         <children>
+            <ImageView fx:id="beetroot" fitHeight="96.0" fitWidth="96.0" onMouseDragged="#plantDraged" onMouseReleased="#plantDrop" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/PlantIcons/active_beetroot.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="peashooter" fitHeight="96.0" fitWidth="96.0" onMouseDragged="#plantDraged" onMouseReleased="#plantDrop" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/PlantIcons/active_peashooter.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sunflower" fitHeight="96.0" fitWidth="96.0" onMouseDragged="#plantDraged" onMouseReleased="#plantDrop" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/PlantIcons/active_sunflower.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="walnut" fitHeight="96.0" fitWidth="96.0" layoutX="10.0" layoutY="202.0" onMouseDragged="#plantDraged" onMouseReleased="#plantDrop" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/PlantIcons/active_walnut.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Button layoutX="91.0" layoutY="890.0" mnemonicParsing="false" onAction="#dropSun" text="Drop Sun" />
+      <ImageView fx:id="zombie" fitHeight="117.0" fitWidth="104.0" layoutX="1509.0" layoutY="252.0" onMouseClicked="#startTransion" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/zombie/zombie_football.gif" />
+         </image>
+      </ImageView>
+      <Button layoutX="1739.0" layoutY="39.0" mnemonicParsing="false" onAction="#showGameMenu" text="Back to Game Menu" />
+      <Button layoutX="1607.0" layoutY="39.0" mnemonicParsing="false" text="Save Button" />
+      <HBox layoutX="25.0" layoutY="26.0" prefHeight="117.0" prefWidth="325.0" style="-fx-background-color: brown;">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="111.0" prefWidth="231.0" text="Sun Count : ">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="numSun" prefHeight="120.0" prefWidth="156.0" text="0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1329.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Counter.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
