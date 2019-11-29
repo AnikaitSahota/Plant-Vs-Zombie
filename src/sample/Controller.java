@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,16 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.Light;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.awt.*;
 import java.io.FileInputStream;
 import java.util.Random;
@@ -37,8 +34,12 @@ public class Controller {
     private ImageView zombie;
     @FXML
     private AnchorPane GamePagePane ;
+    @FXML
+    private GridPane garden ;
+
     private Stage primaryStage = null ;
     private Node node = null ;
+    private back_end_controler be_ctrl = new back_end_controler() ;
 
     public void showSettingWindow(ActionEvent event) throws Exception {
         Stage settingWindow = new Stage() ;
@@ -119,10 +120,8 @@ public class Controller {
         event.consume();
     }
     public void plantDrop(MouseEvent event) throws Exception{
-//        System.out.println("Plant droped");numSun.setText(numSun.getText()+"0");
+        setplant(((Node)(event.getSource())).getId(),event.getSceneX()-20,event.getSceneY()-20);
         node.setCursor(Cursor.DEFAULT) ;
-        Point p = MouseInfo.getPointerInfo().getLocation(); // TODO: this is causing error, handle it
-        setplant(((Node)(event.getSource())).getId(),p.getX(),p.getY());
     }
     private String getPlantImgLoc(String ID) {
         if(ID.equals("beetroot")) return "src/images/Plants/beetroot.gif" ;
@@ -136,10 +135,44 @@ public class Controller {
         if(ID.equals("peashooter"))
             plant.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> shoot_pea(event));
 
-        GamePagePane.getChildren().add(plant) ;
-        plant.setX(X-40);plant.setY(Y-100);
+        Point p = gridIndex(X,Y) ;
+        if(p != null) {
+            garden.add(plant, (int) p.getY(), (int) p.getX()); // sending in format of Column and Row ie. Column major format
+            be_ctrl.addPlant(plant , ID);
+        }
         return;
     }
+    private Point gridIndex(double X , double Y ) {
+        Point gridPt = new Point() ;    // gritPt represent the row and column of the grid plane
+        if(X <= 330.0 || X >= 1335.0 || Y <= 112.0 || Y >= 918.0) return null ;
+
+        // x --> Row index
+        if(X< 438.0)   gridPt.y = 0 ;
+        else if(X < 551.0) gridPt.y = 1 ;
+        else if(X < 671.0) gridPt.y = 2 ;
+        else if(X < 769.0) gridPt.y = 3 ;
+        else if(X < 879.0) gridPt.y = 4 ;
+        else if(X < 993.0) gridPt.y = 5 ;
+        else if(X < 1047.0) gridPt.y = 6 ;
+        else if(X < 1220.0) gridPt.y = 7 ;
+        else gridPt.y = 8 ;
+
+        // y --> column index ;
+        if(Y < 273) gridPt.x = 0 ;
+        else if(Y < 433.0)  gridPt.x = 1 ;
+        else if(Y < 605.0)  gridPt.x = 2 ;
+        else if(Y < 759.0)  gridPt.x = 3 ;
+        else gridPt.x = 4 ;
+
+        for(Node imageview : garden.getChildren()) {
+            if(GridPane.getRowIndex(imageview) == null ) continue;
+            if (GridPane.getRowIndex(imageview) == (int) gridPt.getX() && GridPane.getColumnIndex(imageview) == (int) gridPt.getY())
+                return null;
+        }
+
+        return gridPt ;
+    }
+
     public void startTransion(MouseEvent event) {
         TranslateTransition transition = new TranslateTransition() ;
         transition.setDuration(Duration.seconds(20));
@@ -185,14 +218,15 @@ public class Controller {
             transition.setToX(850);
             transition.setAutoReverse(false);
 
-            pea.setX(peashooter.getX()+65);pea.setY(peashooter.getY()+16);
+            pea.setX(peashooter.getLayoutX() + garden.getLayoutX() +65);
+            pea.setY(peashooter.getLayoutY() + garden.getLayoutY() +16);
             GamePagePane.getChildren().add(pea) ;
 
             transition.setNode((Node) pea);
             transition.play() ;
         }
         catch (Exception e) {
-            System.out.println("Exception caught during shooting pea\n"+e);
+            System.out.println("Exception caught during shooting pea :\n"+e);
         }
 
     }

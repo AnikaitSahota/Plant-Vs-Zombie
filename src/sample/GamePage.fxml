@@ -5,7 +5,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -46,8 +49,8 @@
             <Image url="@../images/zombie/zombie_football.gif" />
          </image>
       </ImageView>
-      <Button layoutX="1739.0" layoutY="39.0" mnemonicParsing="false" onAction="#showGameMenu" text="Back to Game Menu" />
-      <Button layoutX="1607.0" layoutY="39.0" mnemonicParsing="false" text="Save Button" />
+      <Button layoutX="1653.0" layoutY="46.0" mnemonicParsing="false" onAction="#showGameMenu" text="Back to Game Menu" />
+      <Button layoutX="1468.0" layoutY="46.0" mnemonicParsing="false" text="Save Button" />
       <HBox layoutX="25.0" layoutY="26.0" prefHeight="117.0" prefWidth="325.0" style="-fx-background-color: brown;">
          <children>
             <Label alignment="CENTER_RIGHT" prefHeight="111.0" prefWidth="231.0" text="Sun Count : ">
@@ -62,10 +65,25 @@
             </Label>
          </children>
       </HBox>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1329.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Counter.png" />
-         </image>
-      </ImageView>
+      <GridPane fx:id="garden" gridLinesVisible="true" layoutX="350.0" layoutY="133.0" prefHeight="805.0" prefWidth="1004.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="105.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="110.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="118.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="97.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="107.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="102.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="121.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="115.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="171.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="151.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
    </children>
 </AnchorPane>
